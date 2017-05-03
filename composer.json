@@ -1,0 +1,35 @@
+{
+  "name": "haqqi/yii2-metronic",
+  "description": "Yii2 Metronic admin template integration",
+  "license": "MIT License",
+  "authors": [
+    {
+      "name": "MF Haqqi",
+      "email": "me@haqqi.net",
+      "homepage": "http://haqqi.net",
+      "role": "Initiator & Core Developer"
+    }
+  ],
+  "keywords": [
+    "yii2",
+    "template"
+  ],
+  "type": "yii2-extension",
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "require": {
+    "php": ">=5.6.0",
+    "yiisoft/yii2": ">=2.0.0"
+  },
+  "require-dev": {
+    "ccampbell/chromephp": "~4.1"
+  },
+  "extra": {
+    
+  },
+  "autoload": {
+    "psr-4": {
+      "haqqi\\metronic\\": "src/"
+    }
+  }
+}
