@@ -1,11 +1,20 @@
 <?php
 
+use haqqi\metronic\Metronic;
 use yii\web\View;
 
 return [
     'yii\web\JqueryAsset' => [
-        'sourcePath' => null, // do not publish the file
-//        'js'         => ['jquery.min.js'],
-//        'jsOptions'  => ['position' => View::POS_HEAD],
+        'sourcePath' => Yii::$app->get(Metronic::$componentName)->getAssetPath() . '/global/plugins',
+        'js'         => ['jquery.min.js'],
+        'jsOptions'  => ['position' => View::POS_HEAD],
+        'publishOptions' => [
+            'only' => [
+                'jquery.min.js'
+            ],
+            'except' => [
+                '*/'
+            ]
+        ]
     ],
 ];
