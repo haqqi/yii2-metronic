@@ -4,6 +4,7 @@ namespace haqqi\metronic;
 
 use yii\base\Component;
 use yii\base\InvalidConfigException;
+use yii\web\AssetBundle;
 
 class Metronic extends Component
 {
@@ -11,7 +12,7 @@ class Metronic extends Component
     public static $componentName = 'metronic';
 
     /** @var string Version of this extension */
-    public static $version = '1.0';
+    public static $componentVersion = '1.0';
 
     /** @var string Version of Remark admin template used in this current extension version */
     public static $metronicVersion = '4.7.5';
@@ -20,13 +21,23 @@ class Metronic extends Component
     ////// Constant area ///////////////////////
     ////////////////////////////////////////////
 
-    const LAYOUT_1 = 'layout';
-    const LAYOUT_2 = 'layout2';
-    const LAYOUT_3 = 'layout3';
-    const LAYOUT_4 = 'layout4';
-    const LAYOUT_5 = 'layout5';
-    const LAYOUT_6 = 'layout6';
-    const LAYOUT_7 = 'layout7';
+    /** Layout Version */
+    const VERSION_1 = 'layout';
+    const VERSION_2 = 'layout2';
+    const VERSION_3 = 'layout3';
+    const VERSION_4 = 'layout4';
+    const VERSION_5 = 'layout5';
+    const VERSION_6 = 'layout6';
+    const VERSION_7 = 'layout7';
+
+    /** Theme */
+    const THEME_DARK  = 'default';
+    const THEME_LIGHT = 'light';
+
+    /** Style */
+    const STYLE_SQUARE   = 'default';
+    const STYLE_ROUNDED  = 'rounded';
+    const STYLE_MATERIAL = 'material';
 
     ////////////////////////////////////////////
     ///// Template variable area ///////////////
@@ -34,6 +45,11 @@ class Metronic extends Component
 
     /** @var string $assetSourcePath Location of the Metronic admin template asset. */
     public $assetSourcePath;
+
+    /** @var string Asset bundle class to be registered in the layout. Customizable via configuration. This class must depends on MetronicAsset. The default will be MetronicAsset itself. */
+    public $assetBundleClass;
+
+    public $version = self::VERSION_1;
 
     /**
      * @return null|Metronic|object
@@ -46,5 +62,23 @@ class Metronic extends Component
         } catch (InvalidConfigException $e) {
             throw new InvalidConfigException('Component name should be set and named "' . self::$componentName . '".');
         }
+    }
+
+    public function getAssetPath()
+    {
+        return $this->assetSourcePath . '/theme/assets';
+    }
+
+    public function registerAsset($view)
+    {
+        if ($this->assetSourcePath === null) {
+            throw new InvalidConfigException('Please set $assetSourcePath of remark admin template');
+        }
+        if ($this->assetBundleClass === null) {
+            throw new InvalidConfigException('Please set $assetBundleClass property.');
+        }
+        /** @var AssetBundle $assetBundleClass */
+        $assetBundleClass = $this->assetBundleClass;
+        $assetBundleClass::register($view);
     }
 }
