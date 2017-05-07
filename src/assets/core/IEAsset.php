@@ -7,6 +7,10 @@ use yii\web\View;
 
 class IEAsset extends GlobalPluginAssetBundle
 {
+    public $depends = [
+        'mimicreative\assets\Html5ShivAsset'
+    ];
+    
     public $js = [
         'respond.min.js',
         'excanvas.min.js',
