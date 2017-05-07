@@ -19,7 +19,10 @@
   "prefer-stable": true,
   "require": {
     "php": ">=5.6.0",
-    "yiisoft/yii2": ">=2.0.0"
+    "yiisoft/yii2": ">=2.0.0",
+    "mimicreative/yii2-html5shiv": "*",
+    "mimicreative/yii2-simple-line-icons": "*",
+    "rmrevin/yii2-fontawesome": "~2.17",
   },
   "require-dev": {
     "ccampbell/chromephp": "~4.1"
