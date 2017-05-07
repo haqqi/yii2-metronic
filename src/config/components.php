@@ -13,4 +13,19 @@ return [
             'position' => View::POS_HEAD
         ],
     ],
+
+    'yii\bootstrap\BootstrapAsset' => [
+        'css' => [
+            'css/bootstrap.min.css'
+        ]
+    ],
+    
+    'yii\bootstrap\BootstrapPluginAsset' => [
+        'js'        => [
+            'js/bootstrap.min.js'
+        ],
+        'jsOptions' => [
+            'position' => View::POS_HEAD
+        ],
+    ]
 ];
