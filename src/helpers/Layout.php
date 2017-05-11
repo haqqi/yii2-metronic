@@ -19,7 +19,7 @@ class Layout {
      * Retrieves Html options
      * @param string $tag given tag
      * @param boolean $asString if return as string
-     * @return type
+     * @return array|string
      */
     public static function getHtmlOptions($tag, $options = [], $asString = false)
     {

@@ -2,12 +2,15 @@
 
 /** @var \yii\web\View $this */
 
+use haqqi\metronic\assets\core\VersionAsset;
 use haqqi\metronic\helpers\Layout;
 use haqqi\metronic\Metronic;
+use haqqi\metronic\widgets\NavBar;
 use yii\helpers\Html;
 use yii\helpers\Url;
 
-Metronic::getComponent()->registerAsset($this);
+$metronic = Metronic::getComponent();
+$metronic->registerAsset($this);
 
 $this->beginPage();
 
@@ -42,7 +45,36 @@ $this->beginPage();
     <body <?= Layout::getHtmlOptions('body', [], true); ?>>
     <?php $this->beginBody(); ?>
 
-    <?php echo $content; ?>
+    <div class="page-wrapper">
+
+        <?php
+        NavBar::begin([
+            // customizable using params
+        ]);
+        ?>
+
+        <?php NavBar::end(); ?>
+
+        <?= ($metronic->layoutOption == Metronic::LAYOUT_BOXED)
+            ? Html::beginTag('div', ['class' => 'container'])
+            : ''; ?>
+
+        <!-- BEGIN FOOTER -->
+        <div class="page-footer">
+            <div class="page-footer-inner">
+                <?= Yii::$app->params['metronic']['footer']; ?>
+            </div>
+            <div class="scroll-to-top">
+                <i class="icon-arrow-up"></i>
+            </div>
+        </div>
+        <!-- END FOOTER -->
+
+        <?= ($metronic->layoutOption == Metronic::LAYOUT_BOXED)
+            ? Html::endTag('div')
+            : ''; ?>
+    </div>
+
 
     <?php $this->endBody(); ?>
     </body>
