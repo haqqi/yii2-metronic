@@ -77,7 +77,7 @@ class Metronic extends Component
 
     public $style = self::STYLE_SQUARE;
 
-    public $theme = self::THEME_DEFAULT;
+    public $theme = self::THEME_DARK_BLUE;
 
     public $layoutOption = self::LAYOUT_FLUID;
 
