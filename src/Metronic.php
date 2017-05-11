@@ -51,6 +51,8 @@ class Metronic extends Component
 
     public $version = self::VERSION_1;
 
+    public $style = self::STYLE_SQUARE;
+
     /**
      * @return null|Metronic|object
      * @throws InvalidConfigException
