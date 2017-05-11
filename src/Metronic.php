@@ -97,6 +97,9 @@ class Metronic extends Component
     
     public $navbarLeftFile = false;
     public $navbarRightFile = false;
+    
+//    public $sidebarMenuConfigFile = '@haqqi/metronic/config/sidebar.php';
+    public $sidebarMenuConfigFile = false;
 
     public function init()
     {

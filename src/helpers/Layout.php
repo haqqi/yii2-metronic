@@ -38,6 +38,8 @@ class Layout {
     {
         Html::addCssClass($options, 'page-sidebar-closed-hide-logo');
         Html::addCssClass($options, 'page-content-white');
+        
+        $metronic = Metronic::getComponent();
 
         if (Metronic::getComponent() && Metronic::STYLE_MATERIAL === Metronic::getComponent()->style)
         {
@@ -62,6 +64,10 @@ class Layout {
         if (Metronic::getComponent() && Metronic::SIDEBAR_FIXED === Metronic::getComponent()->sidebarOption)
         {
             Html::addCssClass($options, 'page-sidebar-fixed');
+        }
+        
+        if($metronic->sidebarMenuConfigFile === false) {
+            Html::addCssClass($options, 'page-full-width');
         }
 
         if (Metronic::getComponent() && Metronic::FOOTER_FIXED === Metronic::getComponent()->footerOption)
