@@ -10,5 +10,6 @@ class PluginAsset extends AssetBundle
         'haqqi\metronic\assets\plugins\JsCookieAsset',
         'haqqi\metronic\assets\plugins\SlimScrollAsset',
         'haqqi\metronic\assets\plugins\JqueryBlockUiAsset',
+        'haqqi\metronic\assets\plugins\BootstrapSwitchAsset',
     ];
 }
