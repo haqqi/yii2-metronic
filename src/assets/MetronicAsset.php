@@ -11,6 +11,7 @@ class MetronicAsset extends AssetBundle
         'haqqi\metronic\assets\core\MainAsset',
         'haqqi\metronic\assets\core\PluginAsset',
         'haqqi\metronic\assets\core\ComponentAsset',
+        'haqqi\metronic\assets\core\AppJsAsset',
         'haqqi\metronic\assets\core\IEAsset'
     ];
 }
