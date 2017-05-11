@@ -47,6 +47,7 @@ $this->beginPage();
 
     <div class="page-wrapper">
 
+        <!-- BEGIN HEADER -->
         <?php
         NavBar::begin([
             // customizable using params
@@ -54,6 +55,15 @@ $this->beginPage();
         ?>
 
         <?php NavBar::end(); ?>
+        <!-- END HEADER -->
+
+        <!-- BEGIN HEADER & CONTENT DIVIDER -->
+        <div class="clearfix"> </div>
+        <!-- END HEADER & CONTENT DIVIDER -->
+        
+        <div class="page-container">
+            
+        </div>
 
         <?= ($metronic->layoutOption == Metronic::LAYOUT_BOXED)
             ? Html::beginTag('div', ['class' => 'container'])
