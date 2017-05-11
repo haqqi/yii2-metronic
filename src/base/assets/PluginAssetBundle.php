@@ -9,12 +9,6 @@ use yii\web\AssetBundle;
 class PluginAssetBundle extends AssetBundle
 {
     public $pluginName;
-    
-    public $publishOptions = [
-        'except' => [
-            'plugins/'
-        ]
-    ];
 
     public function __construct(array $config = [])
     {
