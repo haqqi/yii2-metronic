@@ -4,6 +4,7 @@ namespace haqqi\metronic\widgets;
 
 use haqqi\metronic\assets\core\VersionAsset;
 use haqqi\metronic\helpers\Layout;
+use haqqi\metronic\Metronic;
 use yii\base\Widget;
 use yii\helpers\Html;
 
@@ -31,8 +32,21 @@ class NavBar extends Widget
         echo Html::beginTag('div', ['class' => 'page-header-inner']);
 
         $this->_renderPageLogo();
+        
+        $metronic = Metronic::getComponent();
+
+        // render left navbar
+        if($metronic->navbarLeftFile) {
+            echo $this->render($metronic->navbarLeftFile);
+        }
+        
         $this->_renderResponsiveToggleButton();
 
+        // render right navbar
+        if($metronic->navbarRightFile) {
+            echo $this->render($metronic->navbarRightFile);
+        }
+        
         parent::init();
     }
 

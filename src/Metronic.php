@@ -94,6 +94,9 @@ class Metronic extends Component
     public $sidebarMenu = self::SIDEBAR_MENU_ACCORDION;
 
     public $footerOption = self::FOOTER_DEFAULT;
+    
+    public $navbarLeftFile = false;
+    public $navbarRightFile = false;
 
     public function init()
     {

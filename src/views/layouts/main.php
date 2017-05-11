@@ -52,9 +52,10 @@ $this->beginPage();
         NavBar::begin([
             // customizable using params
         ]);
+        
+        NavBar::end();
+        
         ?>
-
-        <?php NavBar::end(); ?>
         <!-- END HEADER -->
 
         <!-- BEGIN HEADER & CONTENT DIVIDER -->
