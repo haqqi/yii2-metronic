@@ -8,6 +8,7 @@ class PluginAsset extends AssetBundle
 {
     public $depends = [
         'haqqi\metronic\assets\plugins\JsCookieAsset',
-        'haqqi\metronic\assets\plugins\SlimScrollAsset'
+        'haqqi\metronic\assets\plugins\SlimScrollAsset',
+        'haqqi\metronic\assets\plugins\JqueryBlockUiAsset',
     ];
 }
