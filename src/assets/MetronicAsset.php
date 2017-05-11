@@ -9,6 +9,7 @@ class MetronicAsset extends AssetBundle
     public $depends = [
         'haqqi\metronic\assets\core\FontIconAsset',
         'haqqi\metronic\assets\core\MainAsset',
+        'haqqi\metronic\assets\core\PluginAsset',
         'haqqi\metronic\assets\core\IEAsset'
     ];
 }
