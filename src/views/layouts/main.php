@@ -63,7 +63,21 @@ $this->beginPage();
         <!-- END HEADER & CONTENT DIVIDER -->
         
         <div class="page-container">
-            
+            <!-- BEGIN SIDEBAR -->
+            <div class="page-sidebar-wrapper">
+                
+            </div>
+            <!-- END SIDEBAR -->
+
+            <!-- BEGIN CONTENT -->
+            <div class="page-content-wrapper">
+                <!-- BEGIN CONTENT BODY -->
+                <div class="page-content">
+                    <?= $content; ?>
+                </div>
+                <!-- END CONTENT BODY -->
+            </div>
+            <!-- END CONTENT -->
         </div>
 
         <?= ($metronic->layoutOption == Metronic::LAYOUT_BOXED)
