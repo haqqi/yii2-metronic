@@ -43,6 +43,26 @@ class Metronic extends Component
     const STYLE_ROUNDED  = 'rounded';
     const STYLE_MATERIAL = 'material';
 
+    /** Layout */
+    const LAYOUT_FLUID = 'default';
+    const LAYOUT_BOXED = 'boxed';
+
+    /** Header */
+    const HEADER_DEFAULT = 'default';
+    const HEADER_FIXED   = 'fixed';
+
+    /** Sidebar position */
+    const SIDEBAR_POSITION_LEFT  = 'left';
+    const SIDEBAR_POSITION_RIGHT = 'right';
+
+    /** Sidebar */
+    const SIDEBAR_DEFAULT = 'default';
+    const SIDEBAR_FIXED   = 'fixed';
+
+    /** Footer */
+    const FOOTER_DEFAULT = 'default';
+    const FOOTER_FIXED   = 'fixed';
+
     ////////////////////////////////////////////
     ///// Template variable area ///////////////
     ////////////////////////////////////////////
@@ -56,8 +76,18 @@ class Metronic extends Component
     public $version = self::VERSION_1;
 
     public $style = self::STYLE_SQUARE;
-    
+
     public $theme = self::THEME_DEFAULT;
+
+    public $layoutOption = self::LAYOUT_FLUID;
+
+    public $headerOption = self::HEADER_DEFAULT;
+
+    public $sidebarPosition = self::SIDEBAR_POSITION_LEFT;
+
+    public $sidebarOption = self::SIDEBAR_DEFAULT;
+
+    public $footerOption = self::FOOTER_DEFAULT;
 
     /**
      * @return null|Metronic|object

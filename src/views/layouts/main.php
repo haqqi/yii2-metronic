@@ -2,8 +2,8 @@
 
 /** @var \yii\web\View $this */
 
+use haqqi\metronic\helpers\Layout;
 use haqqi\metronic\Metronic;
-use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\helpers\Url;
 
@@ -14,7 +14,12 @@ $this->beginPage();
 ?>
 
     <!DOCTYPE html>
-    <html lang="<?= Yii::$app->language; ?>" class="">
+    <!--[if IE 8]>
+    <html lang="en" class="ie8 no-js"> <![endif]-->
+    <!--[if IE 9]>
+    <html lang="en" class="ie9 no-js"> <![endif]-->
+    <!--[if !IE]><!-->
+    <html lang="en" class="no-js"><!--<![endif]-->
     <head>
         <meta charset="<?php echo Yii::$app->charset; ?>">
         <meta name="viewport"
@@ -34,7 +39,7 @@ $this->beginPage();
         <!-- SEO things -->
         <?php $this->head(); ?>
     </head>
-    <body class="<?= implode(ArrayHelper::getValue($this->params, 'bodyClass', []), ' '); ?>">
+    <body <?= Layout::getHtmlOptions('body', [], true); ?>>
     <?php $this->beginBody(); ?>
 
     <?php echo $content; ?>
