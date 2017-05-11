@@ -11,10 +11,4 @@ class MainAsset extends AssetBundle
         'yii\bootstrap\BootstrapAsset',
         'yii\bootstrap\BootstrapPluginAsset',
     ];
-    
-    public $css = [
-        // main fonts
-        
-        
-    ];
 }

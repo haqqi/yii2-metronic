@@ -31,8 +31,12 @@ class Metronic extends Component
     const VERSION_7 = 'layout7';
 
     /** Theme */
-    const THEME_DARK  = 'default';
-    const THEME_LIGHT = 'light';
+    const THEME_BLUE      = 'blue';
+    const THEME_DARK_BLUE = 'darkblue';
+    const THEME_DEFAULT   = 'default';
+    const THEME_GREY      = 'grey';
+    const THEME_LIGHT     = 'light';
+    const THEME_LIGHT_2   = 'light2';
 
     /** Style */
     const STYLE_SQUARE   = 'default';
@@ -52,6 +56,8 @@ class Metronic extends Component
     public $version = self::VERSION_1;
 
     public $style = self::STYLE_SQUARE;
+    
+    public $theme = self::THEME_DEFAULT;
 
     /**
      * @return null|Metronic|object
