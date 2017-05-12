@@ -6,6 +6,7 @@ use haqqi\metronic\assets\core\VersionAsset;
 use haqqi\metronic\helpers\Layout;
 use haqqi\metronic\Metronic;
 use haqqi\metronic\widgets\NavBar;
+use haqqi\metronic\widgets\SidebarMenu;
 use yii\helpers\Html;
 use yii\helpers\Url;
 
@@ -63,11 +64,11 @@ $this->beginPage();
         <!-- END HEADER & CONTENT DIVIDER -->
         
         <div class="page-container">
-            <!-- BEGIN SIDEBAR -->
-            <div class="page-sidebar-wrapper">
-                
-            </div>
-            <!-- END SIDEBAR -->
+            <?php
+            if($metronic->sidebarMenuConfigFile !== false) {
+                echo SidebarMenu::widget();
+            }
+            ?>
 
             <!-- BEGIN CONTENT -->
             <div class="page-content-wrapper">

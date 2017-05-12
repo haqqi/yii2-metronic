@@ -61,7 +61,7 @@ class Metronic extends Component
 
     /** Sidebar menu */
     const SIDEBAR_MENU_ACCORDION = 'accordion';
-    const SIDEBAR_MENU_HOVER = 'hover';
+    const SIDEBAR_MENU_HOVER     = 'hover';
 
     /** Footer */
     const FOOTER_DEFAULT = 'default';
@@ -94,10 +94,13 @@ class Metronic extends Component
     public $sidebarMenu = self::SIDEBAR_MENU_ACCORDION;
 
     public $footerOption = self::FOOTER_DEFAULT;
-    
-    public $navbarLeftFile = false;
+
+    public $navbarLeftFile  = false;
     public $navbarRightFile = false;
-    
+
+    /**
+     * @var bool|string File config of sidebar menu. Can also be set as `false` to use full width page.
+     */
 //    public $sidebarMenuConfigFile = '@haqqi/metronic/config/sidebar.php';
     public $sidebarMenuConfigFile = false;
 
@@ -109,7 +112,7 @@ class Metronic extends Component
             throw new InvalidConfigException('Hover Sidebar Menu is not compatible with Fixed Sidebar Mode. Select Default Sidebar Mode Instead.');
         }
     }
-    
+
     /**
      * @return null|Metronic|object
      * @throws InvalidConfigException
