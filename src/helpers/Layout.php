@@ -13,7 +13,8 @@ use yii\helpers\Html;
 /**
  * Layout helper
  */
-class Layout {
+class Layout
+{
 
     /**
      * Retrieves Html options
@@ -38,41 +39,35 @@ class Layout {
     {
         Html::addCssClass($options, 'page-sidebar-closed-hide-logo');
         Html::addCssClass($options, 'page-content-white');
-        
+
         /** @var Metronic $metronic */
         $metronic = Metronic::getComponent();
 
-        if (Metronic::getComponent() && Metronic::STYLE_MATERIAL === Metronic::getComponent()->style)
-        {
+        if (Metronic::STYLE_MATERIAL === $metronic->style) {
             Html::addCssClass($options, 'page-md');
         }
 
-        if (Metronic::getComponent() && Metronic::LAYOUT_BOXED === Metronic::getComponent()->layoutOption)
-        {
+        if (Metronic::LAYOUT_BOXED === $metronic->layoutOption) {
             Html::addCssClass($options, 'page-boxed');
         }
 
-        if (Metronic::getComponent() && Metronic::HEADER_FIXED === Metronic::getComponent()->headerOption)
-        {
+        if (Metronic::HEADER_FIXED === $metronic->headerOption) {
             Html::addCssClass($options, 'page-header-fixed');
         }
 
-        if (Metronic::getComponent() && Metronic::SIDEBAR_POSITION_RIGHT === Metronic::getComponent()->sidebarPosition)
-        {
+        if (Metronic::SIDEBAR_POSITION_RIGHT === $metronic->sidebarPosition) {
             Html::addCssClass($options, 'page-sidebar-reversed');
         }
 
-        if (Metronic::getComponent() && Metronic::SIDEBAR_FIXED === Metronic::getComponent()->sidebarOption)
-        {
+        if (Metronic::SIDEBAR_FIXED === $metronic->sidebarOption) {
             Html::addCssClass($options, 'page-sidebar-fixed');
         }
-        
-        if($metronic->sidebarMenuItemFile === false) {
+
+        if ($metronic->sidebarMenuItemFile === false) {
             Html::addCssClass($options, 'page-full-width');
         }
 
-        if (Metronic::getComponent() && Metronic::FOOTER_FIXED === Metronic::getComponent()->footerOption)
-        {
+        if (Metronic::FOOTER_FIXED === $metronic->footerOption) {
             Html::addCssClass($options, 'page-footer-fixed');
         }
 
@@ -87,12 +82,9 @@ class Layout {
     {
         Html::addCssClass($options, 'page-header navbar');
 
-        if (Metronic::getComponent() && Metronic::HEADER_FIXED === Metronic::getComponent()->headerOption)
-        {
+        if (Metronic::getComponent() && Metronic::HEADER_FIXED === Metronic::getComponent()->headerOption) {
             Html::addCssClass($options, 'navbar-fixed-top');
-        }
-        else
-        {
+        } else {
             Html::addCssClass($options, 'navbar-static-top');
         }
 
