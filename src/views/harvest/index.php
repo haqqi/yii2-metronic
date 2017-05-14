@@ -5,9 +5,24 @@
  * Time: 6:14 PM
  */
 
+use haqqi\metronic\models\Plant;
 use kartik\helpers\Enum;
+use yii\helpers\Html;
+
+$plants = Plant::find()->all();
+
+$links = [];
+foreach ($plants as $p) {
+    $links[] = Html::a($p->name, ['harvest/index', 'plantId' => $p->id], [
+        'class' => 'btn'
+    ]);
+}
 
 ?>
+
+<div>
+    <?= implode('', $links); ?>
+</div>
 
 <div>
     <ul>
