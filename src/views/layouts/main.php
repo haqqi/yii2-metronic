@@ -2,19 +2,29 @@
 
 /** @var \yii\web\View $this */
 
+use haqqi\metronic\assets\core\VersionAsset;
+use haqqi\metronic\helpers\Layout;
 use haqqi\metronic\Metronic;
-use yii\helpers\ArrayHelper;
+use haqqi\metronic\widgets\NavBar;
+use haqqi\metronic\widgets\SidebarMenu;
 use yii\helpers\Html;
 use yii\helpers\Url;
 
-Metronic::getComponent()->registerAsset($this);
+/** @var Metronic $metronic */
+$metronic = Metronic::getComponent();
+$metronic->registerAsset($this);
 
 $this->beginPage();
 
 ?>
 
     <!DOCTYPE html>
-    <html lang="<?= Yii::$app->language; ?>" class="">
+    <!--[if IE 8]>
+    <html lang="en" class="ie8 no-js"> <![endif]-->
+    <!--[if IE 9]>
+    <html lang="en" class="ie9 no-js"> <![endif]-->
+    <!--[if !IE]><!-->
+    <html lang="en" class="no-js"><!--<![endif]-->
     <head>
         <meta charset="<?php echo Yii::$app->charset; ?>">
         <meta name="viewport"
@@ -34,10 +44,64 @@ $this->beginPage();
         <!-- SEO things -->
         <?php $this->head(); ?>
     </head>
-    <body class="<?= implode(ArrayHelper::getValue($this->params, 'bodyClass', []), ' '); ?>">
+    <body <?= Layout::getHtmlOptions('body', [], true); ?>>
     <?php $this->beginBody(); ?>
 
-    <?php echo $content; ?>
+    <div class="page-wrapper">
+
+        <!-- BEGIN HEADER -->
+        <?php
+        NavBar::begin([
+            // customizable using params
+        ]);
+        
+        NavBar::end();
+        
+        ?>
+        <!-- END HEADER -->
+
+        <!-- BEGIN HEADER & CONTENT DIVIDER -->
+        <div class="clearfix"> </div>
+        <!-- END HEADER & CONTENT DIVIDER -->
+        
+        <div class="page-container">
+            <?php
+            if($metronic->sidebarMenuItemFile !== false) {
+                echo SidebarMenu::widget();
+            }
+            ?>
+
+            <!-- BEGIN CONTENT -->
+            <div class="page-content-wrapper">
+                <!-- BEGIN CONTENT BODY -->
+                <div class="page-content">
+                    <?= $content; ?>
+                </div>
+                <!-- END CONTENT BODY -->
+            </div>
+            <!-- END CONTENT -->
+        </div>
+
+        <?= ($metronic->layoutOption == Metronic::LAYOUT_BOXED)
+            ? Html::beginTag('div', ['class' => 'container'])
+            : ''; ?>
+
+        <!-- BEGIN FOOTER -->
+        <div class="page-footer">
+            <div class="page-footer-inner">
+                <?= Yii::$app->params['metronic']['footer']; ?>
+            </div>
+            <div class="scroll-to-top">
+                <i class="icon-arrow-up"></i>
+            </div>
+        </div>
+        <!-- END FOOTER -->
+
+        <?= ($metronic->layoutOption == Metronic::LAYOUT_BOXED)
+            ? Html::endTag('div')
+            : ''; ?>
+    </div>
+
 
     <?php $this->endBody(); ?>
     </body>
