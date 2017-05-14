@@ -10,6 +10,7 @@ use haqqi\metronic\widgets\SidebarMenu;
 use yii\helpers\Html;
 use yii\helpers\Url;
 
+/** @var Metronic $metronic */
 $metronic = Metronic::getComponent();
 $metronic->registerAsset($this);
 
@@ -65,7 +66,7 @@ $this->beginPage();
         
         <div class="page-container">
             <?php
-            if($metronic->sidebarMenuConfigFile !== false) {
+            if($metronic->sidebarMenuItemFile !== false) {
                 echo SidebarMenu::widget();
             }
             ?>

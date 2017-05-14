@@ -39,6 +39,7 @@ class Layout {
         Html::addCssClass($options, 'page-sidebar-closed-hide-logo');
         Html::addCssClass($options, 'page-content-white');
         
+        /** @var Metronic $metronic */
         $metronic = Metronic::getComponent();
 
         if (Metronic::getComponent() && Metronic::STYLE_MATERIAL === Metronic::getComponent()->style)
@@ -66,7 +67,7 @@ class Layout {
             Html::addCssClass($options, 'page-sidebar-fixed');
         }
         
-        if($metronic->sidebarMenuConfigFile === false) {
+        if($metronic->sidebarMenuItemFile === false) {
             Html::addCssClass($options, 'page-full-width');
         }
 

@@ -63,6 +63,9 @@ class Metronic extends Component
     const SIDEBAR_MENU_ACCORDION = 'accordion';
     const SIDEBAR_MENU_HOVER     = 'hover';
 
+    const SIDEBAR_STYLE_DEFAULT = 'default';
+    const SIDEBAR_STYLE_LIGHT   = 'light';
+
     /** Footer */
     const FOOTER_DEFAULT = 'default';
     const FOOTER_FIXED   = 'fixed';
@@ -92,6 +95,8 @@ class Metronic extends Component
     public $sidebarOption = self::SIDEBAR_DEFAULT;
 
     public $sidebarMenu = self::SIDEBAR_MENU_ACCORDION;
+    
+    public $sidebarStyle = self::SIDEBAR_STYLE_DEFAULT;
 
     public $footerOption = self::FOOTER_DEFAULT;
 
@@ -101,8 +106,9 @@ class Metronic extends Component
     /**
      * @var bool|string File config of sidebar menu. Can also be set as `false` to use full width page.
      */
-//    public $sidebarMenuConfigFile = '@haqqi/metronic/config/sidebar.php';
-    public $sidebarMenuConfigFile = false;
+    public $sidebarMenuItemFile = '@haqqi/metronic/config/sidebar-menu.php';
+
+//    public $sidebarMenuItemFile = false;
 
     public function init()
     {

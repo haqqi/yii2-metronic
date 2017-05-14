@@ -10,8 +10,8 @@ use yii\widgets\Menu;
 
 /**
  * Class SidebarMenu
- * 
- * Taken from https://github.com/dlds/yii2-metronic/blob/master/widgets/Menu.php with improvisation
+ *
+ * Inspired from https://github.com/dlds/yii2-metronic/blob/master/widgets/Menu.php with improvisation
  *
  * @author Haqqi <me@haqqi.net>
  * @package haqqi\metronic\widgets
@@ -19,14 +19,24 @@ use yii\widgets\Menu;
 class SidebarMenu extends Menu
 {
     public $activateParents = true;
-    
+
     public $firstItemCssClass = 'start';
 
     public $lastItemCssClass = 'last';
 
     public $submenuTemplate = "\n<ul class='sub-menu'>\n{items}\n</ul>\n";
 
-    public $linkTemplate = '<a href="{url}">{icon}{label}{badge}{arrow}</a>';
+    public $linkTemplate = '<a {attr}>{icon}{label}{selected}{badge}</a>';
+
+    public $headingTemplate = '<h3 class="uppercase">{label}</h3>';
+
+    public function __construct(array $config = [])
+    {
+        $this->items = require(\Yii::getAlias(Metronic::getComponent()->sidebarMenuItemFile));
+
+        parent::__construct($config);
+    }
+
 
     public function init()
     {
@@ -49,42 +59,44 @@ class SidebarMenu extends Menu
 
     protected function renderItems($items, $level = 1)
     {
-        $n = count($items);
+
+        $n     = count($items);
         $lines = [];
-        foreach ($items as $i => $item)
-        {
+        foreach ($items as $i => $item) {
             $options = array_merge($this->itemOptions, ArrayHelper::getValue($item, 'options', []));
-            $tag = ArrayHelper::remove($options, 'tag', 'li');
-            $class = [];
-            if ($item['active'])
-            {
+            $tag     = ArrayHelper::remove($options, 'tag', 'li');
+            $class   = [];
+
+            // normalize heading
+
+
+            if ($item['active']) {
                 $class[] = $this->activeCssClass;
             }
-            if ($i === 0 && $this->firstItemCssClass !== null)
-            {
+            if ($i === 0 && $this->firstItemCssClass !== null) {
                 $class[] = $this->firstItemCssClass;
             }
-            if ($i === $n - 1 && $this->lastItemCssClass !== null)
-            {
+            if ($i === $n - 1 && $this->lastItemCssClass !== null) {
                 $class[] = $this->lastItemCssClass;
             }
-            if (!empty($class))
-            {
-                if (empty($options['class']))
-                {
-                    $options['class'] = implode(' ', $class);
-                }
-                else
-                {
-                    $options['class'] .= ' ' . implode(' ', $class);
-                }
+
+            // normalize url that has subs. if active, add class open.
+            if (!empty($item['items']) && $item['active']) {
+                $class[] = 'open';
             }
 
             // set parent flag
             $item['level'] = $level;
+
+            // overwrite class for heading
+            if ($this->_isHeading($item)) {
+                $options['class'] = 'heading';
+            }
+
+            Html::addCssClass($options, $class);
+
             $menu = $this->renderItem($item);
-            if (!empty($item['items']))
-            {
+            if (!empty($item['items'])) {
                 $menu .= strtr($this->submenuTemplate, [
                     '{items}' => $this->renderItems($item['items'], $level + 1),
                 ]);
@@ -96,30 +108,61 @@ class SidebarMenu extends Menu
 
     protected function renderItem($item)
     {
+        \ChromePhp::log($item);
+        
+        if ($this->_isHeading($item)) {
+            $template = ArrayHelper::getValue($item, 'template', $this->headingTemplate);
+
+            return strtr($template, [
+                '{label}' => ArrayHelper::getValue($item, 'label', ''),
+            ]);
+        }
+
         return strtr(ArrayHelper::getValue($item, 'template', $this->linkTemplate), [
-            '{url}' => $this->_pullItemUrl($item),
-            '{label}' => $this->_pullItemLabel($item),
-            '{icon}' => $this->_pullItemIcon($item),
-            '{arrow}' => $this->_pullItemArrow($item),
-            '{badge}' => $this->_pullItemBadge($item),
+            '{attr}'  => $this->_formatItemAttr($item),
+            '{icon}'  => $this->_formatItemIcon($item),
+            '{label}' => $this->_formatItemLabel($item),
+            '{badge}' => $this->_formatItemBadge($item),
+            '{selected}' => $this->_formatItemSelected($item)
         ]);
     }
 
     /**
-     * Pulls out item url
+     * Check if the item is a heading or not
+     *
+     * @param $item
+     * @return bool
+     */
+    private function _isHeading($item)
+    {
+        return (
+            $item['level'] === 1 &&
+            empty(ArrayHelper::getValue($item, 'url', null)) &&
+            empty(ArrayHelper::getValue($item, 'items', null))
+        );
+    }
+
+    /**
+     * Format out item url
      * @param array $item given item
      * @return string item url
      */
-    private function _pullItemUrl($item)
+    private function _formatItemAttr($item)
     {
-        $url = ArrayHelper::getValue($item, 'url', '#');
-
-        if ('#' === $url)
-        {
-            return 'javascript:;';
+        $options = [
+            'class' => 'nav-link',
+            'href' => ArrayHelper::getValue($item, 'url', '#')
+        ];
+        
+        if(!empty($item['items'])) {
+            Html::addCssClass($options, 'nav-toggle');
+            $options['href'] = 'javascript:void(0);';
         }
 
-        return Url::toRoute($item['url']);
+        // route the url
+        $options['href'] = \Yii::$app->urlManager->createUrl($options['href']);
+        
+        return Html::renderTagAttributes($options);
     }
 
     /**
@@ -127,18 +170,11 @@ class SidebarMenu extends Menu
      * @param array $item given item
      * @return string item label
      */
-    private function _pullItemLabel($item)
+    private function _formatItemLabel($item)
     {
         $label = ArrayHelper::getValue($item, 'label', '');
 
-        $level = ArrayHelper::getValue($item, 'level', 1);
-
-        if (1 == $level)
-        {
-            return Html::tag('span', $label, ['class' => 'title']);
-        }
-
-        return sprintf(' %s', $label);
+        return sprintf(Html::tag('span', $label, ['class' => 'title']));
     }
 
     /**
@@ -146,36 +182,22 @@ class SidebarMenu extends Menu
      * @param array $item given item
      * @return string item icon
      */
-    private function _pullItemIcon($item)
+    private function _formatItemIcon($item)
     {
         $icon = ArrayHelper::getValue($item, 'icon', null);
 
-        if ($icon)
-        {
-            return Html::tag('i', '', ['class' => $icon]);
+        if ($icon) {
+            // add space after icon
+            return $icon . ' ';
         }
 
         return '';
     }
-
-    /**
-     * Pulls out item arrow
-     * @param array $item given item
-     * @return string item arrow
-     */
-    private function _pullItemArrow($item)
-    {
-        $active = ArrayHelper::getValue($item, 'active', false);
-
-        $level = ArrayHelper::getValue($item, 'level', 1);
-
-        $items = ArrayHelper::getValue($item, 'items', []);
-
-        if (!empty($items))
-        {
-            return Html::tag('span', '', ['class' => 'arrow' . ($active ? ' open' : '')]);
+    
+    private function _formatItemSelected($item) {
+        if($item['level'] == 1 && $item['active']) {
+            return Html::tag('span', '', ['class' => 'selected']);
         }
-
         return '';
     }
 
@@ -184,9 +206,27 @@ class SidebarMenu extends Menu
      * @param array $item given item
      * @return string item badge
      */
-    private function _pullItemBadge($item)
+    private function _formatItemBadge($item)
     {
-        return ArrayHelper::getValue($item, 'badge', '');
+        // only show badge or arrow
+
+        $badge = ArrayHelper::getValue($item, 'badge', null);
+
+        if ($badge !== null) {
+            return $badge;
+        } else {
+            if (!empty($item['items'])) {
+                $options = [
+                    'class' => 'arrow'
+                ];
+                if($item['active']) {
+                    Html::addCssClass($options, 'open');
+                }
+                return Html::tag('span', '', $options);
+            }
+        }
+
+        return '';
     }
 
     /**
@@ -196,14 +236,23 @@ class SidebarMenu extends Menu
     {
         Html::addCssClass($this->options, 'page-sidebar-menu');
 
-        if (Metronic::SIDEBAR_MENU_HOVER === Metronic::getComponent()->sidebarMenu)
-        {
+        if (Metronic::SIDEBAR_MENU_HOVER === Metronic::getComponent()->sidebarMenu) {
             Html::addCssClass($this->options, 'page-sidebar-menu-hover-submenu');
         }
 
-        $this->options['data-slide-speed'] = 200;
-        $this->options['data-auto-scroll'] = 'true';
-        $this->options['data-keep-expanded'] = 'false';
-        $this->options['data-height'] = 261;
+        if (Metronic::SIDEBAR_STYLE_LIGHT === Metronic::getComponent()->sidebarStyle) {
+            Html::addCssClass($this->options, 'page-sidebar-menu-light');
+        }
+
+        $defaultOptions = [
+            'data-auto-speed'    => 200,
+            'data-slide-speed'   => 200,
+            'data-auto-scroll'   => 'true',
+            'data-keep-expanded' => 'false',
+            'style'              => 'padding-top: 20px'
+        ];
+
+        $this->options              = ArrayHelper::merge($defaultOptions, $this->options);
+        $this->itemOptions['class'] = 'nav-item';
     }
 }
