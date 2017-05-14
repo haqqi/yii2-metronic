@@ -25,4 +25,13 @@ class VersionAsset extends AssetBundle
         
         parent::__construct($config);
     }
+    
+    public static function noPublish() {
+        \Yii::$container->setDefinitions([
+            self::className() => [
+                'css' => [],
+                'js' => []
+            ]
+        ]);
+    }
 }
