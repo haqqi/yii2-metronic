@@ -1,0 +1,11 @@
+.page-sidebar .page-sidebar-menu > li > a > .badge {
+  top: auto;
+}
+.page-sidebar .page-sidebar-menu i.fa {
+  vertical-align: -4%;
+}
+.page-sidebar .page-sidebar-menu i.mdi {
+  vertical-align: -3px;
+  margin-right: 3px;
+  margin-left: 2px;
+}
