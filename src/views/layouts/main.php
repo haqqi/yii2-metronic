@@ -2,7 +2,6 @@
 
 /** @var \yii\web\View $this */
 
-use haqqi\metronic\assets\core\VersionAsset;
 use haqqi\metronic\helpers\Layout;
 use haqqi\metronic\Metronic;
 use haqqi\metronic\widgets\NavBar;
