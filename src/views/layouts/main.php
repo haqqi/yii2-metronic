@@ -2,49 +2,17 @@
 
 /** @var \yii\web\View $this */
 
-use haqqi\metronic\helpers\Layout;
 use haqqi\metronic\Metronic;
 use haqqi\metronic\widgets\NavBar;
 use haqqi\metronic\widgets\SidebarMenu;
 use yii\helpers\Html;
-use yii\helpers\Url;
+
+$this->beginContent(__DIR__ . '/base.php');
 
 /** @var Metronic $metronic */
 $metronic = Metronic::getComponent();
-$metronic->registerAsset($this);
-
-$this->beginPage();
 
 ?>
-
-    <!DOCTYPE html>
-    <!--[if IE 8]>
-    <html lang="en" class="ie8 no-js"> <![endif]-->
-    <!--[if IE 9]>
-    <html lang="en" class="ie9 no-js"> <![endif]-->
-    <!--[if !IE]><!-->
-    <html lang="en" class="no-js"><!--<![endif]-->
-    <head>
-        <meta charset="<?php echo Yii::$app->charset; ?>">
-        <meta name="viewport"
-              content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta http-equiv="content-type" content="text/html;charset=UTF-8">
-
-        <!-- icon -->
-        <?php echo Html::csrfMetaTags(); ?>
-        <title><?php echo Html::encode($this->title); ?></title>
-
-        <!-- js helper -->
-        <script type="text/javascript">
-          var BASE_URL = '<?= Url::base(true); ?>';
-        </script>
-
-        <!-- SEO things -->
-        <?php $this->head(); ?>
-    </head>
-    <body <?= Layout::getHtmlOptions('body', [], true); ?>>
-    <?php $this->beginBody(); ?>
 
     <div class="page-wrapper">
 
@@ -53,19 +21,19 @@ $this->beginPage();
         NavBar::begin([
             // customizable using params
         ]);
-        
+
         NavBar::end();
-        
+
         ?>
         <!-- END HEADER -->
 
         <!-- BEGIN HEADER & CONTENT DIVIDER -->
-        <div class="clearfix"> </div>
+        <div class="clearfix"></div>
         <!-- END HEADER & CONTENT DIVIDER -->
-        
+
         <div class="page-container">
             <?php
-            if($metronic->sidebarMenuItemFile !== false) {
+            if ($metronic->sidebarMenuItemFile !== false) {
                 echo SidebarMenu::widget();
             }
             ?>
@@ -100,12 +68,6 @@ $this->beginPage();
             ? Html::endTag('div')
             : ''; ?>
     </div>
-
-
-    <?php $this->endBody(); ?>
-    </body>
-    </html>
-
 <?php
 
-$this->endPage();
+$this->endContent();
