@@ -7,6 +7,6 @@ use haqqi\metronic\base\assets\GlobalAssetBundle;
 class AppJsAsset extends GlobalAssetBundle
 {
     public $js = [
-        'scripts/app.js'
+        'scripts/app.min.js'
     ];
 }
