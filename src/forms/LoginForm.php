@@ -15,6 +15,12 @@ class LoginForm extends Model {
     public $password;
     public $rememberMe;
 
+    public $registerEnable = true;
+    public $registerUrl    = ['metronic/auth/register'];
+
+    public $forgotPasswordEnable = true;
+    public $forgotPasswordUrl    = ['auth/forgot-password'];
+
     /** @var IdentityInterface */
     protected $_user;
 
