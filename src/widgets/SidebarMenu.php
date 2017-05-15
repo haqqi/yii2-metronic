@@ -157,10 +157,10 @@ class SidebarMenu extends Menu
         if(!empty($item['items'])) {
             Html::addCssClass($options, 'nav-toggle');
             $options['href'] = 'javascript:void(0);';
+        } else {
+            // route the url
+            $options['href'] = \Yii::$app->urlManager->createUrl($options['href']);
         }
-
-        // route the url
-        $options['href'] = \Yii::$app->urlManager->createUrl($options['href']);
         
         return Html::renderTagAttributes($options);
     }
