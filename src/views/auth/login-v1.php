@@ -15,9 +15,7 @@ use yii\helpers\Html;
 ?>
 
     <div class="logo">
-        <?php $img = \Yii::$app->assetManager->getBundle(PageLevelAsset::className())->baseUrl . '/img/logo-big.png';
-        echo Html::img($img, ['alt' => 'Logo']);
-        ?>
+        <?= Html::img($loginForm->logoUrl, ['alt' => 'Logo']); ?>
     </div>
 
     <div class="content">
@@ -57,7 +55,7 @@ use yii\helpers\Html;
                 ['class' => 'btn green uppercase', 'tabindex' => 4]); ?>
 
             <?= $form->field($loginForm, 'rememberMe', [
-                'options' => [
+                'options'          => [
                     'tag' => null
                 ],
                 'checkboxTemplate' => "<label class='rememberme check mt-checkbox mt-checkbox-outline'>\n{input}\n{labelTitle}\n<span></span></label>"
@@ -69,26 +67,24 @@ use yii\helpers\Html;
             }
             ?>
         </div>
-        
-        <div class="login-options">
-            <h4>Or login with</h4>
-            <ul class="social-icons">
-                <li>
-                    <a class="social-icon-color facebook" data-original-title="facebook" href="javascript:;"></a>
-                </li>
-                <li>
-                    <a class="social-icon-color twitter" data-original-title="Twitter" href="javascript:;"></a>
-                </li>
-                <li>
-                    <a class="social-icon-color googleplus" data-original-title="Goole Plus"
-                       href="javascript:;"></a>
-                </li>
-                <li>
-                    <a class="social-icon-color linkedin" data-original-title="Linkedin" href="javascript:;"></a>
-                </li>
-            </ul>
-        </div>
+        <?php if ($loginForm->socialMediaLoginEnable) { ?>
+            <div class="login-options">
+                <h4>Or login with</h4>
+                <ul class="social-icons">
+                    <?php foreach ($loginForm->socialMediaLoginUrl as $socmed => $url) {
 
+                        $url = Html::a('', Yii::$app->urlManager->createUrl($url), [
+                            'class' => [
+                                'social-icon-color',
+                                $socmed
+                            ]
+                        ]);
+                        echo Html::tag('li', $url);
+
+                    } ?>
+                </ul>
+            </div>
+        <?php } ?>
         <?php if ($loginForm->registerEnable) { ?>
             <div class="create-account">
                 <p>

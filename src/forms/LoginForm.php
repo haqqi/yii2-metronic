@@ -2,6 +2,7 @@
 
 namespace haqqi\metronic\forms;
 
+use haqqi\metronic\assets\core\PageLevelAsset;
 use yii\base\InvalidConfigException;
 use yii\base\Model;
 use yii\db\ActiveRecord;
@@ -25,17 +26,26 @@ class LoginForm extends Model
 
     public $socialMediaLoginEnable = true;
     public $socialMediaLoginUrl    = [
-        'facebook' => 'metronic/auth/social/facebook',
-        'twitter'  => 'metronic/auth/social/twitter',
-        'gplus'    => 'metronic/auth/social/gplus',
-        'linkedin' => 'metronic/auth/social/linkedin',
+        'facebook'   => ['metronic/auth/social/facebook'],
+        'twitter'    => ['metronic/auth/social/twitter'],
+        'googleplus' => ['metronic/auth/social/googleplus'],
+        'linkedin'   => ['metronic/auth/social/linkedin'],
     ];
+    
+    public $logoUrl;
 
     /** @var IdentityInterface */
     protected $_user;
 
     /** @var string */
     protected $_userClass;
+
+    public function __construct(array $config = [])
+    {
+        $this->logoUrl = \Yii::$app->assetManager->getBundle(PageLevelAsset::className())->baseUrl . '/img/logo-big.png';
+        
+        parent::__construct($config);
+    }
 
     public function rules()
     {
