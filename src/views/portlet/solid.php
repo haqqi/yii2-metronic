@@ -8,7 +8,14 @@ use haqqi\metronic\widgets\Portlet;
         <div class="col-md-6">
             <?php
 
-            Portlet::begin([]);
+            Portlet::begin([
+                'color' => 'purple',
+//                'type' => Portlet::TYPE_SOLID,
+                'titleSubject' => 'Portlet',
+                'titleIconClass' => 'icon-speech',
+                'titleHelper' => 'Finish it...',
+                'bordered' => true
+            ]);
 
             ?>
 
