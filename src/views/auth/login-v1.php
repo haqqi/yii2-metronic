@@ -104,7 +104,7 @@ if (isset ($copyRight)) {
     echo $copyRight;
 } else { ?>
     <div class="copyright">
-        Yii2 Metronic Admin Template Integration by <a href="https://github.com/haqqi" target="_blank">Haqqi</a>
+        <?= Yii::$app->params['metronic']['copyright']; ?>
     </div>
 <?php } ?>
 
