@@ -15,7 +15,9 @@ use yii\helpers\Html;
 ?>
 
     <div class="logo">
-        <?= Html::img($loginForm->logoUrl, ['alt' => 'Logo']); ?>
+        <?= $loginForm->logoTargetUrl !== null ? Html::beginTag('a', ['href' => $loginForm->logoTargetUrl]) : ''; ?>
+        <?= Html::img($loginForm->logoImageUrl, ['alt' => 'Logo']); ?>
+        <?= $loginForm->logoTargetUrl !== null ? Html::endTag('a') : ''; ?>
     </div>
 
     <div class="content">

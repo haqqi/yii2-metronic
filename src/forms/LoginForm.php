@@ -32,7 +32,8 @@ class LoginForm extends Model
         'linkedin'   => ['metronic/auth/social/linkedin'],
     ];
     
-    public $logoUrl;
+    public $logoTargetUrl;
+    public $logoImageUrl;
 
     /** @var IdentityInterface */
     protected $_user;
@@ -42,7 +43,8 @@ class LoginForm extends Model
 
     public function __construct(array $config = [])
     {
-        $this->logoUrl = \Yii::$app->assetManager->getBundle(PageLevelAsset::className())->baseUrl . '/img/logo-big.png';
+        $this->logoImageUrl = \Yii::$app->assetManager->getBundle(PageLevelAsset::className())->baseUrl . '/img/logo-big.png';
+        $this->logoTargetUrl = \Yii::$app->homeUrl;
         $this->scenario = self::SCENARIO_SUBMIT_LOGIN;
         
         parent::__construct($config);
