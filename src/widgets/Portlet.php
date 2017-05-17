@@ -27,6 +27,7 @@ class Portlet extends Widget
     public $titleHelper;
     
     public $actions;
+    public $tools;
 
     public $scroller        = true;
     public $scrollerOptions = [];
@@ -171,7 +172,12 @@ class Portlet extends Widget
             echo Html::endTag('div');
         }
 
-        
+        if(empty($this->actions)) {
+            echo Html::tag('div', $this->actions, ['class' => 'actions']);
+        }
+        if(empty($this->tools)) {
+            echo Html::tag('div', $this->tools, ['class' => 'tools']);
+        }
 
         echo Html::endTag('div');
     }

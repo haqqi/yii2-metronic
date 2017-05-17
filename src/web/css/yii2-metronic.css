@@ -9,3 +9,6 @@
   margin-right: 3px;
   margin-left: 2px;
 }
+.portlet-title .actions + .tools {
+  margin-left: 5px;
+}
