@@ -108,8 +108,6 @@ class SidebarMenu extends Menu
 
     protected function renderItem($item)
     {
-        \ChromePhp::log($item);
-        
         if ($this->_isHeading($item)) {
             $template = ArrayHelper::getValue($item, 'template', $this->headingTemplate);
 
@@ -235,6 +233,10 @@ class SidebarMenu extends Menu
     private function _initOptions()
     {
         Html::addCssClass($this->options, 'page-sidebar-menu');
+        
+        if(ArrayHelper::getValue($_COOKIE, 'sidebar_closed', 0)) {
+            Html::addCssClass($this->options, 'page-sidebar-menu-closed');
+        }
 
         if (Metronic::SIDEBAR_MENU_HOVER === Metronic::getComponent()->sidebarMenu) {
             Html::addCssClass($this->options, 'page-sidebar-menu-hover-submenu');

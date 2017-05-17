@@ -8,6 +8,7 @@
 namespace haqqi\metronic\helpers;
 
 use haqqi\metronic\Metronic;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 
 /**
@@ -61,6 +62,10 @@ class Layout
 
         if (Metronic::SIDEBAR_FIXED === $metronic->sidebarOption) {
             Html::addCssClass($options, 'page-sidebar-fixed');
+        }
+        
+        if(ArrayHelper::getValue($_COOKIE, 'sidebar_closed', 0)) {
+            Html::addCssClass($options, 'page-sidebar-closed');
         }
 
         if ($metronic->sidebarMenuItemFile === false) {
