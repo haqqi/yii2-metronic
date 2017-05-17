@@ -1,5 +1,6 @@
 <?php
 
+use haqqi\metronic\assets\plugins\DataTableAsset;
 use haqqi\metronic\base\assets\GlobalPluginAssetBundle;
 use yii\web\View;
 
@@ -27,5 +28,9 @@ return [
         'jsOptions' => [
             'position' => View::POS_HEAD
         ],
+    ],
+    
+    'mimicreative\datatables\assets\DataTableAsset' => [
+        'class' => DataTableAsset::className()
     ]
 ];
