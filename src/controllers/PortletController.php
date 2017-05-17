@@ -2,12 +2,10 @@
 
 namespace haqqi\metronic\controllers;
 
-use yii\web\Controller;
+use haqqi\metronic\base\MetronicController;
 
-class PortletController extends Controller
+class PortletController extends MetronicController
 {
-    public $layout = '@haqqi/metronic/views/layouts/main';
-    
     public function actionSolid() {
         return $this->render('solid');
     }
