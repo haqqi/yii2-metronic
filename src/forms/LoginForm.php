@@ -39,7 +39,7 @@ class LoginForm extends Model
     protected $_user;
 
     /** @var string */
-    protected $_userClass;
+    protected $_userClass = null;
 
     public function __construct(array $config = [])
     {
@@ -48,6 +48,14 @@ class LoginForm extends Model
         $this->scenario = self::SCENARIO_SUBMIT_LOGIN;
         
         parent::__construct($config);
+    }
+
+    public function init()
+    {
+        parent::init();
+        if (is_null($this->_userClass)) {
+            throw new InvalidConfigException("Please set user class");
+        }
     }
 
     public function rules()
