@@ -7,16 +7,25 @@
 
 namespace haqqi\metronic\assets\plugins;
 
+use haqqi\metronic\base\assets\PluginAssetBundle;
 
-use haqqi\metronic\base\assets\GlobalAssetBundle;
-
-class DataTableAsset extends GlobalAssetBundle
+class DataTableAsset extends PluginAssetBundle
 {
+    public $pluginName = 'datatables';
+    
     public $depends = [
         'yii\web\JqueryAsset',
+        'yii\bootstrap\BootstrapAsset',
+        'yii\bootstrap\BootstrapPluginAsset',
+    ];
+    
+    public $css = [
+        'datatables.min.css',
+        'plugins/bootstrap/datatables.bootstrap.css'
     ];
     
     public $js = [
-        'scripts/datatable.min.js'
+        'datatables.min.js',
+        'plugins/bootstrap/datatables.bootstrap.js'
     ];
 }
