@@ -30,18 +30,6 @@ class PageLevelAsset extends AssetBundle
         $this->_handleAddons();
     }
 
-    public static function login()
-    {
-        \Yii::$container->setDefinitions([
-            self::className() => [
-                'css' => [
-                    'css/login.min.css'
-                ],
-                'js'  => []
-            ]
-        ]);
-    }
-
     private function _handleAddons()
     {
         $requestedRoute = \Yii::$app->requestedRoute;

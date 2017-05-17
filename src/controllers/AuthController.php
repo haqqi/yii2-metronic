@@ -18,7 +18,7 @@ class AuthController extends Controller
     
     public function actionLoginV1() {
         VersionAsset::noPublish(); // no need to publish version asset, but we need the other
-        PageLevelAsset::login();
+        
         $this->view->params['bodyClass'] = ['login'];
         
         $loginForm = new LoginForm();

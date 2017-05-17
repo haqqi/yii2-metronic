@@ -2,6 +2,7 @@
 
 namespace haqqi\metronic;
 
+use haqqi\metronic\assets\core\PageLevelAsset;
 use yii\base\BootstrapInterface;
 use yii\helpers\ArrayHelper;
 
@@ -13,6 +14,16 @@ class Bootstrap implements BootstrapInterface
         if ($app->has(Metronic::$componentName)) {
             // setup default params for remark template
             $app->params = ArrayHelper::merge(require(__DIR__ . '/config/params.php'), \Yii::$app->params);
+
+            $app->assetManager->bundles[PageLevelAsset::className()] = [
+                'addons' => [
+                    'metronic/auth/login-v1' => [
+                        'css' => [
+                            'css/login.min.css'
+                        ]
+                    ]
+                ]
+            ];
 
             // override the definitions if any
             \Yii::$container->setDefinitions(require(__DIR__ . '/config/components.php'));
