@@ -12,18 +12,20 @@ use haqqi\metronic\base\assets\PluginAssetBundle;
 class DataTableAsset extends PluginAssetBundle
 {
     public $pluginName = 'datatables';
-    
+
     public $depends = [
         'yii\web\JqueryAsset',
         'yii\bootstrap\BootstrapAsset',
         'yii\bootstrap\BootstrapPluginAsset',
+        'haqqi\metronic\assets\core\PluginAsset',
+        'haqqi\metronic\assets\plugins\datatables\DataTableGlobal',
     ];
-    
+
     public $css = [
         'datatables.min.css',
         'plugins/bootstrap/datatables.bootstrap.css'
     ];
-    
+
     public $js = [
         'datatables.min.js',
         'plugins/bootstrap/datatables.bootstrap.js'
