@@ -3,7 +3,7 @@ namespace haqqi\metronic\widgets;
 
 use yii\bootstrap\ActiveField;
 
-class MetronicField extends ActiveField
+class MaterialField extends ActiveField
 {
     public $options = ['class' => 'form-group form-md-line-input form-md-floating-label'];
     public $template = "{input}\n{label}\n{hint}\n{error}";
