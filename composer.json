@@ -23,7 +23,7 @@
     "mimicreative/yii2-html5shiv": "*",
     "mimicreative/yii2-simple-line-icons": "*",
     "rmrevin/yii2-fontawesome": "~2.17",
-    "mimicreative/yii2-datatables": "*"
+    "mimicreative/yii2-datatables": "dev-metronic-support"
   },
   "require-dev": {
     "ccampbell/chromephp": "~4.1"

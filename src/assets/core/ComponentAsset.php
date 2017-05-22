@@ -18,7 +18,7 @@ class ComponentAsset extends GlobalAssetBundle
      * @var array depended bundles
      */
     public $depends = [
-        'haqqi\metronic\assets\core\MainAsset',
+        'haqqi\metronic\assets\core\PluginAsset',
     ];
     /**
      * @var array css assets

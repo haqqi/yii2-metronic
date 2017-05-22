@@ -7,6 +7,10 @@ use yii\web\AssetBundle;
 
 class VersionAsset extends AssetBundle
 {
+    public $depends = [
+        'haqqi\metronic\assets\core\AppJsAsset',
+    ];
+    
     public $css = [
         'css/layout.min.css'
     ];
