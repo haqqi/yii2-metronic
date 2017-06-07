@@ -31,7 +31,6 @@ class LoginForm extends \haqqi\metronic\base\LoginForm
 
     public function __construct(array $config = [])
     {
-        $this->logoImageUrl = \Yii::$app->assetManager->getBundle(PageLevelAsset::className())->baseUrl . '/img/logo-big.png';
         $this->logoTargetUrl = \Yii::$app->homeUrl;
         
         parent::__construct($config);

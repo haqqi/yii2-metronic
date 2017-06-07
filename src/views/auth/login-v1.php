@@ -6,17 +6,29 @@
  */
 
 use haqqi\metronic\assets\core\PageLevelAsset;
+use haqqi\metronic\assets\core\VersionAsset;
 use haqqi\metronic\forms\LoginForm;
 use yii\bootstrap\ActiveForm;
 use yii\helpers\Html;
 
 /** @var LoginForm $loginForm */
 
+// custom definition for version asset in login page
+VersionAsset::noPublish();
+
+$this->params['bodyClass'] = ['login'];
+
+// custom css for register enable and other
+if($loginForm->registerEnable === false && $loginForm->socialMediaLoginEnable === false) {
+    $this->registerCss('.login .content {padding-bottom: 10px;}');
+    $this->registerCss('.login .content .form-actions {border-bottom: none;}');
+}
+
 ?>
 
     <div class="logo">
         <?= $loginForm->logoTargetUrl !== null ? Html::beginTag('a', ['href' => $loginForm->logoTargetUrl]) : ''; ?>
-        <?= Html::img($loginForm->logoImageUrl, ['alt' => 'Logo']); ?>
+        <?= Html::img($loginForm->logoImageUrl === null ? \Yii::$app->assetManager->getBundle(PageLevelAsset::className())->baseUrl . '/img/logo-big.png' : $loginForm->logoImageUrl, ['alt' => 'Logo']); ?>
         <?= $loginForm->logoTargetUrl !== null ? Html::endTag('a') : ''; ?>
     </div>
 
@@ -99,13 +111,8 @@ use yii\helpers\Html;
         <!-- END LOGIN FORM -->
     </div>
 
-<?php
-if (isset ($copyRight)) {
-    echo $copyRight;
-} else { ?>
     <div class="copyright">
-        <?= Yii::$app->params['metronic']['copyright']; ?>
+        <?= isset ($copyRight) && !is_null($copyRight) ? $copyRight : Yii::$app->params['metronic']['copyright']; ?>
     </div>
-<?php } ?>
 
 <?php
