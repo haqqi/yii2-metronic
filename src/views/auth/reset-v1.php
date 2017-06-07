@@ -1,9 +1,4 @@
 <?php
-/**
- * User: Haqqi
- * Date: 5/15/2017
- * Time: 5:49 AM
- */
 
 use haqqi\metronic\assets\core\PageLevelAsset;
 use haqqi\metronic\assets\core\VersionAsset;
@@ -55,18 +50,18 @@ $this->registerCss('.login .content {padding-bottom: 10px;}');
             ]
         ]);
         ?>
-        <h3 class="form-title font-green">Forget Password?</h3>
-        <p>Enter your e-mail address below to reset your password.</p>
+        <h3 class="form-title font-green">Reset Password</h3>
+        <p>Enter new password for your account.</p>
         <?= $form->field($resetPasswordForm, 'password', [
             'inputOptions' => [
                 'tabindex'    => 1,
-                'placeholder' => $resetPasswordForm->getAttributeLabel('email')
+                'placeholder' => $resetPasswordForm->getAttributeLabel('password')
             ]
         ])->passwordInput(); ?>
         <div class="form-actions">
             <?= Html::a('Back', $resetPasswordForm->loginUrl,
                 ['class' => 'btn green btn-outline', 'id' => 'back-btn']); ?>
-            <?= Html::submitButton('Reset Password',
+            <?= Html::submitButton('Submit',
                 ['class' => 'btn green uppercase pull-right', 'tabindex' => 2]); ?>
         </div>
         <?php ActiveForm::end(); ?>
