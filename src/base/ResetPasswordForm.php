@@ -35,8 +35,8 @@ class ResetPasswordForm extends Model
     public function rules()
     {
         return [
-            [['passwordResetToken', 'password'], 'required'],
-            [['passwordResetToken', 'password'], 'trim'],
+            [['password'], 'required'],
+            [['password'], 'trim'],
         ];
     }
 
