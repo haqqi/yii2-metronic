@@ -19,16 +19,21 @@ VersionAsset::noPublish();
 $this->params['bodyClass'] = ['login'];
 
 // custom css for register enable and other
-if($loginForm->registerEnable === false && $loginForm->socialMediaLoginEnable === false) {
-    $this->registerCss('.login .content {padding-bottom: 10px;}');
-    $this->registerCss('.login .content .form-actions {border-bottom: none;}');
+if ($loginForm->registerEnable === false && $loginForm->socialMediaLoginEnable === false) {
+    $this->registerCss(
+        <<<CSS
+.login .content {padding-bottom: 0px;}
+.login .content .form-actions {border-bottom: none;}
+CSS
+    );
 }
 
 ?>
 
     <div class="logo">
         <?= $loginForm->logoTargetUrl !== null ? Html::beginTag('a', ['href' => $loginForm->logoTargetUrl]) : ''; ?>
-        <?= Html::img($loginForm->logoImageUrl === null ? \Yii::$app->assetManager->getBundle(PageLevelAsset::className())->baseUrl . '/img/logo-big.png' : $loginForm->logoImageUrl, ['alt' => 'Logo']); ?>
+        <?= Html::img($loginForm->logoImageUrl === null ? \Yii::$app->assetManager->getBundle(PageLevelAsset::className())->baseUrl . '/img/logo-big.png' : $loginForm->logoImageUrl,
+            ['alt' => 'Logo']); ?>
         <?= $loginForm->logoTargetUrl !== null ? Html::endTag('a') : ''; ?>
     </div>
 
