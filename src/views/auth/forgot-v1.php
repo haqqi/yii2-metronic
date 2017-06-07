@@ -56,7 +56,7 @@ $this->registerCss('.login .content {padding-bottom: 10px;}');
         ]);
         ?>
         <h3 class="form-title font-green">Forget Password?</h3>
-        <p>Enter your e-mail address below to reset your password.</p>
+        <?= $forgotPasswordForm->message; ?>
         <?= $form->field($forgotPasswordForm, 'email', [
             'inputOptions' => [
                 'tabindex'    => 1,
@@ -66,7 +66,7 @@ $this->registerCss('.login .content {padding-bottom: 10px;}');
         <div class="form-actions">
             <?= Html::a('Back', $forgotPasswordForm->loginUrl,
                 ['class' => 'btn green btn-outline', 'id' => 'back-btn']); ?>
-            <?= Html::submitButton('Login',
+            <?= Html::submitButton('Request Reset Link',
                 ['class' => 'btn green uppercase pull-right', 'tabindex' => 2]); ?>
         </div>
         <?php ActiveForm::end(); ?>
