@@ -57,6 +57,7 @@ CSS
         ]);
         ?>
         <h3 class="form-title font-green">Sign In</h3>
+        <?= isset($message) ? $message : '';?>
         <?= $form->field($loginForm, 'email', [
             'inputOptions' => [
                 'tabindex'    => 1,

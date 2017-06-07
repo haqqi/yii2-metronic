@@ -56,6 +56,7 @@ $this->registerCss('.login .content {padding-bottom: 10px;}');
         ]);
         ?>
         <h3 class="form-title font-green">Forget Password?</h3>
+        <?= isset($message) ? $message : '';?>
         <?= $forgotPasswordForm->message; ?>
         <?= $form->field($forgotPasswordForm, 'email', [
             'inputOptions' => [

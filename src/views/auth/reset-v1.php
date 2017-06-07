@@ -51,6 +51,7 @@ $this->registerCss('.login .content {padding-bottom: 10px;}');
         ]);
         ?>
         <h3 class="form-title font-green">Reset Password</h3>
+        <?= isset($message) ? $message : '';?>
         <p>Enter new password for your account.</p>
         <?= $form->field($resetPasswordForm, 'password', [
             'inputOptions' => [
