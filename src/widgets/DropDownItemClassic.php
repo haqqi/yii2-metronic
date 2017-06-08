@@ -24,6 +24,14 @@ class DropDownItemClassic extends Menu
             throw new InvalidConfigException('$parentItem must be set.');
         }
 
+        if ($this->route === null && \Yii::$app->controller !== null) {
+            $this->route = \Yii::$app->controller->getRoute();
+        }
+        if ($this->params === null) {
+            $this->params = \Yii::$app->request->getQueryParams();
+        }
+        $this->items = $this->normalizeItems($this->items, $hasActiveChild);
+
         $this->_initOptions();
     }
 
@@ -32,6 +40,13 @@ class DropDownItemClassic extends Menu
         echo Html::beginTag('li', $this->parentOptions);
 
         echo $this->renderItem($this->parentItem);
+
+        if (!empty($this->items)) {
+            $options = $this->options;
+            $tag = ArrayHelper::remove($options, 'tag', 'ul');
+
+            echo Html::tag($tag, $this->renderItems($this->items), $options);
+        }
 
         echo Html::endTag('li');
     }
@@ -43,13 +58,63 @@ class DropDownItemClassic extends Menu
         if (!empty($this->items)) {
             $this->parentOptions['aria-haspopup'] = 'true';
             $this->parentItem['href']             = '#';
-            $this->parentItem['label'] .= FA::icon('angle-down');
+            $this->parentItem['label']            .= ' ' . FA::icon('angle-down');
         }
         $this->parentItem['options'] = ArrayHelper::getValue($this->parentItem, 'options', []);
         $this->parentItem['options'] = ArrayHelper::merge($this->parentItem['options'], [
             'data-hover'        => 'megamenu-dropdown',
             'data-close-others' => 'true'
         ]);
+        
+        // dropdown menu options
+        $defaultOptions = [
+            'class' => 'dropdown-menu'
+        ];
+
+        $this->options              = ArrayHelper::merge($defaultOptions, $this->options);
+    }
+
+    /**
+     * Recursively renders the menu items (without the container tag).
+     * @param array $items the menu items to be rendered recursively
+     * @return string the rendering result
+     */
+    protected function renderItems($items)
+    {
+        $n = count($items);
+        $lines = [];
+        foreach ($items as $i => $item) {
+            $options = array_merge($this->itemOptions, ArrayHelper::getValue($item, 'options', []));
+            $tag = ArrayHelper::remove($options, 'tag', 'li');
+            $class = [];
+            if ($item['active']) {
+                $class[] = $this->activeCssClass;
+            }
+            if ($i === 0 && $this->firstItemCssClass !== null) {
+                $class[] = $this->firstItemCssClass;
+            }
+            if ($i === $n - 1 && $this->lastItemCssClass !== null) {
+                $class[] = $this->lastItemCssClass;
+            }
+
+            // add class if the item has subs
+            if (!empty($item['items'])) {
+                $class[] = 'dropdown-submenu';
+            }
+            
+            Html::addCssClass($options, $class);
+
+            $menu = $this->renderItem($item);
+            if (!empty($item['items'])) {
+                $submenuTemplate = ArrayHelper::getValue($item, 'submenuTemplate', $this->submenuTemplate);
+                $menu .= strtr($submenuTemplate, [
+                    '{items}' => $this->renderItems($item['items']),
+                ]);
+            }
+            $lines[] = Html::tag($tag, $menu, $options);
+        }
+
+        return implode("\n", $lines);
     }
 
     protected function renderItem($item)

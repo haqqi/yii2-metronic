@@ -13,6 +13,10 @@
   margin-left: 5px;
 }
 
+.page-header.navbar .hor-menu .navbar-nav>li .dropdown-menu li>a .badge, .page-header.navbar .hor-menu .navbar-nav>li .dropdown-menu li>a .label {
+  margin-right: 10px;
+}
+
 
 /* datatables */
 table.dataTable thead .sorting {
