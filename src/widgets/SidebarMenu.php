@@ -5,7 +5,6 @@ namespace haqqi\metronic\widgets;
 use haqqi\metronic\Metronic;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
-use yii\helpers\Url;
 use yii\widgets\Menu;
 
 /**
@@ -30,14 +29,6 @@ class SidebarMenu extends Menu
 
     public $headingTemplate = '<h3 class="uppercase">{label}</h3>';
 
-    public function __construct(array $config = [])
-    {
-        $this->items = require(\Yii::getAlias(Metronic::getComponent()->sidebarMenuItemFile));
-
-        parent::__construct($config);
-    }
-
-
     public function init()
     {
         parent::init();
@@ -47,19 +38,11 @@ class SidebarMenu extends Menu
 
     public function run()
     {
-        // begin sidebar
-        echo Html::beginTag('div', ['class' => 'page-sidebar-wrapper']);
-        echo Html::beginTag('div', ['class' => 'page-sidebar navbar-collapse collapse']);
-
         parent::run();
-
-        echo Html::endTag('div');
-        echo Html::endTag('div'); // end sidebar
     }
 
     protected function renderItems($items, $level = 1)
     {
-
         $n     = count($items);
         $lines = [];
         foreach ($items as $i => $item) {
@@ -117,10 +100,10 @@ class SidebarMenu extends Menu
         }
 
         return strtr(ArrayHelper::getValue($item, 'template', $this->linkTemplate), [
-            '{attr}'  => $this->_formatItemAttr($item),
-            '{icon}'  => $this->_formatItemIcon($item),
-            '{label}' => $this->_formatItemLabel($item),
-            '{badge}' => $this->_formatItemBadge($item),
+            '{attr}'     => $this->_formatItemAttr($item),
+            '{icon}'     => $this->_formatItemIcon($item),
+            '{label}'    => $this->_formatItemLabel($item),
+            '{badge}'    => $this->_formatItemBadge($item),
             '{selected}' => $this->_formatItemSelected($item)
         ]);
     }
@@ -149,17 +132,17 @@ class SidebarMenu extends Menu
     {
         $options = [
             'class' => 'nav-link',
-            'href' => ArrayHelper::getValue($item, 'url', '#')
+            'href'  => ArrayHelper::getValue($item, 'url', '#')
         ];
-        
-        if(!empty($item['items'])) {
+
+        if (!empty($item['items'])) {
             Html::addCssClass($options, 'nav-toggle');
             $options['href'] = 'javascript:void(0);';
         } else {
             // route the url
             $options['href'] = \Yii::$app->urlManager->createUrl($options['href']);
         }
-        
+
         return Html::renderTagAttributes($options);
     }
 
@@ -191,9 +174,10 @@ class SidebarMenu extends Menu
 
         return '';
     }
-    
-    private function _formatItemSelected($item) {
-        if($item['level'] == 1 && $item['active']) {
+
+    private function _formatItemSelected($item)
+    {
+        if ($item['level'] == 1 && $item['active']) {
             return Html::tag('span', '', ['class' => 'selected']);
         }
         return '';
@@ -217,7 +201,7 @@ class SidebarMenu extends Menu
                 $options = [
                     'class' => 'arrow'
                 ];
-                if($item['active']) {
+                if ($item['active']) {
                     Html::addCssClass($options, 'open');
                 }
                 return Html::tag('span', '', $options);
@@ -233,8 +217,8 @@ class SidebarMenu extends Menu
     private function _initOptions()
     {
         Html::addCssClass($this->options, 'page-sidebar-menu');
-        
-        if(ArrayHelper::getValue($_COOKIE, 'sidebar_closed', 0)) {
+
+        if (ArrayHelper::getValue($_COOKIE, 'sidebar_closed', 0)) {
             Html::addCssClass($this->options, 'page-sidebar-menu-closed');
         }
 

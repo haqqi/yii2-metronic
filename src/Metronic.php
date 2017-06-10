@@ -102,13 +102,7 @@ class Metronic extends Component
 
     public $navbarLeftFile  = false;
     public $navbarRightFile = false;
-
-    /**
-     * @var bool|string File config of sidebar menu. Can also be set as `false` to use full width page.
-     */
-    public $sidebarMenuItemFile = '@haqqi/metronic/config/sidebar-menu.php';
-
-//    public $sidebarMenuItemFile = false;
+    public $sidebarFile = false;
 
     public function init()
     {

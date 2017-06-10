@@ -33,8 +33,8 @@ $metronic = Metronic::getComponent();
 
         <div class="page-container">
             <?php
-            if ($metronic->sidebarMenuItemFile !== false) {
-                echo SidebarMenu::widget();
+            if($metronic->sidebarFile) {
+                echo $this->render($metronic->sidebarFile);
             }
             ?>
 
