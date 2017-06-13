@@ -15,7 +15,8 @@ class Portlet extends Widget
     public $type = self::TYPE_LIGHT;
 
     /** @var array Portlet container options for the html */
-    public $options = [];
+    public $options     = [];
+    public $bodyOptions = [];
 
     public $color;
 
@@ -53,7 +54,10 @@ class Portlet extends Widget
         // render title
         $this->_renderTitle();
         // open body tag
-        echo Html::beginTag('div', ['class' => 'portlet-body']);
+        $defaultBodyOptions = ['class' => 'portlet-body'];
+        $this->bodyOptions  = ArrayHelper::merge($defaultBodyOptions, $this->bodyOptions);
+
+        echo Html::beginTag('div', $this->bodyOptions);
         if ($this->scroller) {
             echo Html::beginTag('div', $this->scrollerOptions);
         }
