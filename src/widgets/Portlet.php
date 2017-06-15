@@ -54,7 +54,13 @@ class Portlet extends Widget
         // render title
         $this->_renderTitle();
         // open body tag
-        $defaultBodyOptions = ['class' => 'portlet-body'];
+        $defaultBodyOptions = [
+            'class' => ['portlet-body']
+        ];
+        if (isset($this->bodyOptions['class']) and is_string($this->bodyOptions['class'])) {
+            $this->bodyOptions['class'] .= " " . implode(" ", $defaultBodyOptions['class']);
+        }
+
         $this->bodyOptions  = ArrayHelper::merge($defaultBodyOptions, $this->bodyOptions);
 
         echo Html::beginTag('div', $this->bodyOptions);
@@ -106,6 +112,9 @@ class Portlet extends Widget
         $defaultOptions = [
             'class' => $classes
         ];
+        if (isset($this->options['class']) and is_string($this->options['class'])) {
+            $this->options['class'] .= " " . implode(" ", $classes);
+        }
         $this->options  = ArrayHelper::merge($defaultOptions, $this->options);
 
         // scroller options
