@@ -13,9 +13,7 @@ $this->beginContent(__DIR__ . '/main.php');
 
 <?php if (isset($this->params['pageBreadcrumb'])) { ?>
     <div class="page-bar">
-        <?= Breadcrumbs::widget([
-            'links' => $this->params['pageBreadcrumb']
-        ]); ?>
+        <?= Breadcrumbs::widget($this->params['pageBreadcrumb']); ?>
         
         <?= isset($this->params['pageToolbar']) ? Html::tag('div', $this->params['pageToolbar']) : ''; ?>
     </div>
