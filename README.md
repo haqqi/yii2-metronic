@@ -9,4 +9,5 @@ There is one good similar library you can use at https://github.com/dlds/yii2-me
 Difference with Metronic:
 
 - FontAwesome use 4.7 through `rmrevin/yii2-fontawesome`
+- MomentJs use bower version, because metronic version has error warning.
 
