@@ -24,7 +24,8 @@
     "mimicreative/yii2-simple-line-icons": "*",
     "rmrevin/yii2-fontawesome": "~2.17",
     "mimicreative/yii2-datatables": "dev-metronic-support",
-    "bower-asset/moment": "2.*"
+    "bower-asset/moment": "2.*",
+    "bower-asset/bootstrap-daterangepicker": "2.*"
   },
   "require-dev": {
     "ccampbell/chromephp": "~4.1"

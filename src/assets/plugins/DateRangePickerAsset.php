@@ -2,21 +2,28 @@
 
 namespace haqqi\metronic\assets\plugins;
 
-use haqqi\metronic\base\assets\PluginAssetBundle;
+use yii\web\AssetBundle;
 
-class DateRangePickerAsset extends PluginAssetBundle
+class DateRangePickerAsset extends AssetBundle
 {
-    public $pluginName = 'bootstrap-daterangepicker';
+    public $sourcePath = '@bower/bootstrap-daterangepicker';
 
     public $depends = [
         'haqqi\metronic\assets\plugins\MomentJsAsset'
     ];
 
     public $css = [
-        'daterangepicker.min.css'
+        'daterangepicker.css'
     ];
 
     public $js = [
-        'daterangepicker.min.js'
+        'daterangepicker.js'
+    ];
+    
+    public $publishOptions = [
+        'only' => [
+            '/daterangepicker.css',
+            '/daterangepicker.js'
+        ]
     ];
 }

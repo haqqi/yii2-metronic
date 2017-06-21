@@ -36,3 +36,7 @@ table.dataTable thead .sorting_desc_disabled {
 
 table.dataTable th:active {
   outline: none; }
+
+.daterangepicker .ranges {
+  width: auto;
+}

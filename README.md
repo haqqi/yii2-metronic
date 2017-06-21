@@ -10,4 +10,5 @@ Difference with Metronic:
 
 - FontAwesome use 4.7 through `rmrevin/yii2-fontawesome`
 - MomentJs use bower version, because metronic version has error warning.
+- DateRangePicker use bower version, because of enhancement of options.
 
