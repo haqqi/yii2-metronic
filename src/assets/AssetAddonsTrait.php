@@ -58,7 +58,7 @@ trait AssetAddonsTrait
 
         // loop this for each classname
         foreach ($this->dependsOnRoute as $class => $routes) {
-            if (in_array($requestedRoute, $routes) || !in_array($class, $this->depends)) {
+            if (in_array($requestedRoute, $routes) && !in_array($class, $this->depends)) {
                 // add to depends
                 $this->depends[] = $class;
             }
@@ -71,7 +71,7 @@ trait AssetAddonsTrait
 
         // loop this for each classname
         foreach ($this->cssOnRoute as $css => $routes) {
-            if (in_array($requestedRoute, $routes) || !in_array($css, $this->css)) {
+            if (in_array($requestedRoute, $routes) && !in_array($css, $this->css)) {
                 // add to depends
                 $this->css[] = $css;
             }
@@ -84,7 +84,7 @@ trait AssetAddonsTrait
 
         // loop this for each classname
         foreach ($this->jsOnRoute as $js => $routes) {
-            if (in_array($requestedRoute, $routes) || !in_array($js, $this->js)) {
+            if (in_array($requestedRoute, $routes) && !in_array($js, $this->js)) {
                 // add to depends
                 $this->js[] = $js;
             }
