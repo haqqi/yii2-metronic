@@ -39,7 +39,7 @@ class LoginForm extends Model
     {
         return [
             [['email', 'password'], 'required'],
-            [['email', 'password'], 'trim'],
+            [['email'], 'trim'],
             ['email', 'email'],
             ['email', 'exist', 'targetClass' => $this->_userClass, 'message' => 'Email / user does not exist'],
             ['password', 'validatePassword']
