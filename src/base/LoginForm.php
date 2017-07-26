@@ -90,7 +90,11 @@ class LoginForm extends Model
             /** @var ActiveRecord|IdentityInterface $class */
             $class = $this->_userClass;
 
-            $this->_user = $class::findOne(['email' => $this->email]);
+            if ($this->loginWith === self::WITH_EMAIL) {
+               $this->_user = $class::findOne(['email' => $this->email]);
+            } elseif ($this->loginWith === self::WITH_USERNAME) {
+                $this->_user = $class::findOne(['username' => $this->username]);
+            }
         }
 
         return $this->_user;
