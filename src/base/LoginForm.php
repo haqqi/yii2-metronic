@@ -8,9 +8,11 @@ use yii\web\IdentityInterface;
 
 class LoginForm extends Model
 {
-    const SCENARIO_SUBMIT_LOGIN = 'submitLogin';
+    const WITH_EMAIL = 'EMAIL';
+    const WITH_USERNAME = 'USERNAME';
 
     public $email;
+    public $username;
     public $password;
     public $rememberMe;
 
@@ -19,13 +21,6 @@ class LoginForm extends Model
 
     /** @var string */
     protected $_userClass = null;
-
-    public function __construct(array $config = [])
-    {
-        $this->scenario = self::SCENARIO_SUBMIT_LOGIN;
-
-        parent::__construct($config);
-    }
 
     public function init()
     {
@@ -38,10 +33,10 @@ class LoginForm extends Model
     public function rules()
     {
         return [
-            [['email', 'password'], 'required'],
-            [['email'], 'trim'],
+            [['email', 'username', 'password'], 'required'],
+            [['email', 'username'], 'trim'],
             ['email', 'email'],
-            ['email', 'exist', 'targetClass' => $this->_userClass, 'message' => 'Email / user does not exist'],
+            [['email', 'username'], 'exist', 'targetClass' => $this->_userClass, 'message' => 'User does not exist'],
             ['password', 'validatePassword']
         ];
     }
@@ -61,8 +56,9 @@ class LoginForm extends Model
 
     public function scenarios()
     {
-        $scenarios                              = parent::scenarios();
-        $scenarios[self::SCENARIO_SUBMIT_LOGIN] = ['email', 'password', 'rememberMe'];
+        $scenarios                      = parent::scenarios();
+        $scenarios[self::WITH_EMAIL]    = ['email', 'password', 'rememberMe'];
+        $scenarios[self::WITH_USERNAME] = ['username', 'password', 'rememberMe'];
         return $scenarios;
     }
 

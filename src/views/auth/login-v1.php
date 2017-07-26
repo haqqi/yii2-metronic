@@ -58,12 +58,21 @@ CSS
         ?>
         <h3 class="form-title font-green">Sign In</h3>
         <?= isset($message) ? $message : '';?>
+        <?php if ($loginForm->loginWith === LoginForm::WITH_EMAIL): ?>
         <?= $form->field($loginForm, 'email', [
             'inputOptions' => [
                 'tabindex'    => 1,
                 'placeholder' => $loginForm->getAttributeLabel('email')
             ]
         ]); ?>
+        <?php elseif($loginForm->loginWith === LoginForm::WITH_USERNAME): ?>
+        <?= $form->field($loginForm, 'username', [
+            'inputOptions' => [
+                'tabindex'    => 1,
+                'placeholder' => $loginForm->getAttributeLabel('username')
+            ]
+        ]); ?>
+        <?php endif ?>
         <?= $form->field($loginForm, 'password', [
             'inputOptions' => [
                 'tabindex'    => 2,

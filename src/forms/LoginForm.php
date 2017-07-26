@@ -28,11 +28,25 @@ class LoginForm extends \haqqi\metronic\base\LoginForm
     
     public $logoTargetUrl;
     public $logoImageUrl;
+    public $loginWith;
 
     public function __construct(array $config = [])
     {
         $this->logoTargetUrl = \Yii::$app->homeUrl;
         
         parent::__construct($config);
+    }
+
+    public function init()
+    {
+        if (is_null($this->loginWith)) {
+            $this->loginWith = self::WITH_EMAIL;
+        }
+
+        if (!in_array($this->loginWith, [self::WITH_EMAIL, self::WITH_USERNAME])) {
+            throw new InvalidConfigException("Invalid loginWith");
+        }
+
+        $this->scenario = $this->loginWith;
     }
 }
