@@ -11,6 +11,9 @@ class LoginForm extends Model
     const WITH_EMAIL = 'EMAIL';
     const WITH_USERNAME = 'USERNAME';
 
+    /** THIS WILL BE USED BY DEFAULT **/
+    const SCENARIO_SUBMIT_LOGIN = 'EMAIL';
+
     public $email;
     public $username;
     public $password;
